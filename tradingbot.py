@@ -59,23 +59,23 @@ data = pd.DataFrame(data, columns=['date', 'low', 'high', 'open', 'close', 'volu
 # Load the data into a backtesting class called Run
 r = gemini.Run(data)
 
-def Logic(Account, Lookback):
+def Logic(Account, DataFrame):
     px = pd.DataFrame([], columns=["time", "9ma", "26ma", "std"])
-    px['time'] = pd.to_datetime(Lookback['date'], unit='s')
-    px['9ma'] = Lookback["close"].rolling(9).mean()
-    px['12ma'] = Lookback["close"].rolling(12).mean()
-    px['std'] = Lookback["close"].rolling(9).std()
-    zscores = (Lookback['close'] - px['9ma']) / px['std']
+    px['time'] = pd.to_datetime(DataFrame['date'], unit='s')
+    px['9ma'] = DataFrame["close"].rolling(9).mean()
+    px['12ma'] = DataFrame["close"].rolling(12).mean()
+    px['std'] = DataFrame["close"].rolling(9).std()
+    zscores = (DataFrame['close'] - px['9ma']) / px['std']
     if px.shape[0] < 12:
         return
     print(px['9ma'] - px['12ma'])
     # Sell short if the z-score is > 1
     if zscores[-1:].item() > 1:
-        ExitPrice = Lookback[-1:]
+        ExitPrice = DataFrame[-1:]
         tradingbot.sell(ExitPrice)
     # Buy long if the z-score is < 1
     elif zscores[-1:].item() < -1:
-        EntryPrice = Lookback[-1:]
+        EntryPrice = DataFrame[-1:]
         tradingbot.buy(EntryPrice)
 
 
