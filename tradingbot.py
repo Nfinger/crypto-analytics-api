@@ -1,7 +1,7 @@
 import gdax, time
 
 class TradingBot:
-    def __init__():
+    def __init__(self):
         self.USD = 0
         self.holdings = 0
         self.trades = []
@@ -25,13 +25,14 @@ class WebsocketClient(gdax.WebsocketClient):
         print("Lets count the messages!")
         
     def on_message(self, msg):
-        if !(msg["type"] === 'done' && msg["reason"] === 'filled'):
+        if msg["type"] != 'done' and msg["reason"] != 'filled':
             return
+        self.message_count += 1
 
         analytics = tradingbot.analyze(msg)
-        if (analytics.buy)
+        if (analytics.buy):
             tradingbot.buy()
-        if (analytics.sell)
+        if (analytics.sell):
             tradingbot.sell()
 
     def on_close(self):
