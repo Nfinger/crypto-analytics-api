@@ -7,33 +7,32 @@ class TradingBot:
         self.trades = []
 
 
-    def analyze(data):
+    def analyze(self, data):
         # make a decision based off the data we get
         # make a billion dollars
         pass
-    def buy():
+    def buy(self):
         pass
     
-    def sell():
+    def sell(self):
         pass
 
 class WebsocketClient(gdax.WebsocketClient):
     def on_open(self):
         self.url = "wss://ws-feed.gdax.com/"
-        self.products = ["LTC-USD"]
+        self.products = ["ETH-USD"]
         self.message_count = 0
         print("Lets count the messages!")
         
     def on_message(self, msg):
-        if msg["type"] != 'done' and msg["reason"] != 'filled':
-            return
-        self.message_count += 1
+        if msg["type"] == 'done' and msg["reason"] == 'filled' and "price" in msg:
+            print(msg["price"])
 
-        analytics = tradingbot.analyze(msg)
-        if (analytics.buy):
-            tradingbot.buy()
-        if (analytics.sell):
-            tradingbot.sell()
+            analytics = tradingbot.analyze(msg)
+            # if (analytics.buy):
+            #     tradingbot.buy()
+            # if (analytics.sell):
+            #     tradingbot.sell()
 
     def on_close(self):
         print("-- Goodbye! --")
@@ -43,7 +42,6 @@ tradingbot = TradingBot()
 wsClient = WebsocketClient()
 wsClient.start()
 print(wsClient.url, wsClient.products)
-while (wsClient.message_count < 500):
-    print ("\nmessage_count =", "{} \n".format(wsClient.message_count))
+while (True):
     time.sleep(1)
 wsClient.close()
