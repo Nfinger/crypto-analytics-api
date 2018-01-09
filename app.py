@@ -9,7 +9,7 @@ from binance.enums import *
 
 import urllib.request
 
-from tradingbot import TradingBot
+# from tradingbot import TradingBot
 
 api_key = 'EcBv9wqxfdWNMhtOI8WbkGb9XwOuITAPxBdljcxv8RYX1H7u2ucC0qokDp2KOWmr'
 api_secret = 'i5Y57Gwu8sH9qUE5TbB7zLotm7deTa1D9S8K458LWLXZZzNq5wNAZOHlGJmyjq1s'
