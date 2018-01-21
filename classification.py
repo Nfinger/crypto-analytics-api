@@ -62,6 +62,7 @@ data = data.sort_index(axis=0, ascending=False)
 
 # # integer encode
 labels = data['action'].values
+print(labels)
 label_encoder = LabelEncoder()
 integer_encoded = label_encoder.fit_transform(labels)
 # binary encode
@@ -77,12 +78,58 @@ data = data.fillna(0)
 # One-hot encoding the action
 processed_data = pd.get_dummies(data)
 
+# Technical Analysis
+RSI_PERIOD = 14
+RSI_AVG_PERIOD = 15
+MACD_FAST = 12
+MACD_SLOW = 26
+MACD_SIGNAL = 9
+STOCH_K = 14
+STOCH_D = 5
+
+# stoch_k, stoch_d = ta.STOCH(processed_data.high.as_matrix(), processed_data.low.as_matrix(), processed_data.close.as_matrix(), slowk_period=STOCH_K, slowd_period=STOCH_D)
+# rsi = ta.RSI(processed_data.close.as_matrix(), RSI_PERIOD)
+# processed_data['rsi'] = rsi
+# processed_data['stoch_k'] = stoch_k
+# processed_data['ULTOSC'] = ta.ULTOSC(processed_data.high.as_matrix(), processed_data.low.as_matrix(), processed_data.close.as_matrix(), timeperiod1=7, timeperiod2=14, timeperiod3=28)
 # Normalizing the close and the open scores to be in the interval (0,1)
 scaler = MinMaxScaler(feature_range=(0, 1))
+processed_data["CDL3BLACKCROWS"] = ta.CDL3BLACKCROWS(processed_data.open.as_matrix(), processed_data.high.as_matrix(), processed_data.low.as_matrix(), processed_data.close.as_matrix())
+processed_data["CDL3INSIDE"] = ta.CDL3INSIDE(processed_data.open.as_matrix(), processed_data.high.as_matrix(), processed_data.low.as_matrix(), processed_data.close.as_matrix())
+processed_data["CDL3LINESTRIKE"] = ta.CDL3LINESTRIKE(processed_data.open.as_matrix(), processed_data.high.as_matrix(), processed_data.low.as_matrix(), processed_data.close.as_matrix())
+processed_data["CDL3STARSINSOUTH"] = ta.CDL3STARSINSOUTH(processed_data.open.as_matrix(), processed_data.high.as_matrix(), processed_data.low.as_matrix(), processed_data.close.as_matrix())
+processed_data["CDLHAMMER"] = ta.CDLHAMMER(processed_data.open.as_matrix(), processed_data.high.as_matrix(), processed_data.low.as_matrix(), processed_data.close.as_matrix())
+processed_data["CDL3WHITESOLDIERS"] = ta.CDL3WHITESOLDIERS(processed_data.open.as_matrix(), processed_data.high.as_matrix(), processed_data.low.as_matrix(), processed_data.close.as_matrix())
+processed_data["CDLADVANCEBLOCK"] = ta.CDLADVANCEBLOCK(processed_data.open.as_matrix(), processed_data.high.as_matrix(), processed_data.low.as_matrix(), processed_data.close.as_matrix())
+processed_data["CDLCONCEALBABYSWALL"] = ta.CDLCONCEALBABYSWALL(processed_data.open.as_matrix(), processed_data.high.as_matrix(), processed_data.low.as_matrix(), processed_data.close.as_matrix())
+processed_data["CDLDARKCLOUDCOVER"] = ta.CDLDARKCLOUDCOVER(processed_data.open.as_matrix(), processed_data.high.as_matrix(), processed_data.low.as_matrix(), processed_data.close.as_matrix())
+processed_data["CDLENGULFING"] = ta.CDLENGULFING(processed_data.open.as_matrix(), processed_data.high.as_matrix(), processed_data.low.as_matrix(), processed_data.close.as_matrix())
+processed_data["CDLGAPSIDESIDEWHITE"] = ta.CDLGAPSIDESIDEWHITE(processed_data.open.as_matrix(), processed_data.high.as_matrix(), processed_data.low.as_matrix(), processed_data.close.as_matrix())
+processed_data["CDLHANGINGMAN"] = ta.CDLHANGINGMAN(processed_data.open.as_matrix(), processed_data.high.as_matrix(), processed_data.low.as_matrix(), processed_data.close.as_matrix())
+processed_data["CDLTHRUSTING"] = ta.CDLTHRUSTING(processed_data.open.as_matrix(), processed_data.high.as_matrix(), processed_data.low.as_matrix(), processed_data.close.as_matrix())
 processed_data["close"] = scaler.fit_transform(processed_data["close"].values.reshape(-1,1))
 processed_data["open"] = scaler.fit_transform(processed_data["open"].values.reshape(-1,1))
 processed_data["high"] = scaler.fit_transform(processed_data["high"].values.reshape(-1,1))
 processed_data["low"] = scaler.fit_transform(processed_data["low"].values.reshape(-1,1))
+# y = y[np.isfinite(processed_data['ULTOSC'])]
+# processed_data = processed_data[np.isfinite(processed_data['ULTOSC'])]
+# processed_data["rsi"] = scaler.fit_transform(processed_data["rsi"].values.reshape(-1,1))
+# processed_data["stoch_k"] = scaler.fit_transform(processed_data["stoch_k"].values.reshape(-1,1))
+# processed_data["ULTOSC"] = scaler.fit_transform(processed_data["ULTOSC"].values.reshape(-1,1))
+processed_data["CDL3BLACKCROWS"] = scaler.fit_transform(processed_data["CDL3BLACKCROWS"].values.reshape(-1,1))
+processed_data["CDL3INSIDE"] = scaler.fit_transform(processed_data["CDL3INSIDE"].values.reshape(-1,1))
+processed_data["CDL3LINESTRIKE"] = scaler.fit_transform(processed_data["CDL3LINESTRIKE"].values.reshape(-1,1))
+processed_data["CDL3STARSINSOUTH"] = scaler.fit_transform(processed_data["CDL3STARSINSOUTH"].values.reshape(-1,1))
+processed_data["CDLHAMMER"] = scaler.fit_transform(processed_data["CDLHAMMER"].values.reshape(-1,1))
+processed_data["CDL3WHITESOLDIERS"] = scaler.fit_transform(processed_data["CDL3WHITESOLDIERS"].values.reshape(-1,1))
+processed_data["CDLADVANCEBLOCK"] = scaler.fit_transform(processed_data["CDLADVANCEBLOCK"].values.reshape(-1,1))
+processed_data["CDLCONCEALBABYSWALL"] = scaler.fit_transform(processed_data["CDLCONCEALBABYSWALL"].values.reshape(-1,1))
+processed_data["CDLDARKCLOUDCOVER"] = scaler.fit_transform(processed_data["CDLDARKCLOUDCOVER"].values.reshape(-1,1))
+processed_data["CDLENGULFING"] = scaler.fit_transform(processed_data["CDLENGULFING"].values.reshape(-1,1))
+processed_data["CDLGAPSIDESIDEWHITE"] = scaler.fit_transform(processed_data["CDLGAPSIDESIDEWHITE"].values.reshape(-1,1))
+processed_data["CDLHANGINGMAN"] = scaler.fit_transform(processed_data["CDLHANGINGMAN"].values.reshape(-1,1))
+processed_data["CDLTHRUSTING"] = scaler.fit_transform(processed_data["CDLTHRUSTING"].values.reshape(-1,1))
+print(y)
 
 # Splitting the data input into X, and the labels y 
 X = np.array(processed_data)[:,1:]
@@ -98,8 +145,8 @@ print("\nFirst 10 rows of y")
 print(y[:10])
 
 # break training set into training and validation sets
-(X_train, X_test) = X[50:], X[(X.shape[0] - 50):]
-(y_train, y_test) = y[50:], y[(y.shape[0] - 50):]
+(X_train, X_test) = X[2000:], X[:2000]
+(y_train, y_test) = y[2000:], y[:2000]
 
 # print shape of training set
 print('x_train shape:', X_train.shape)
@@ -110,9 +157,9 @@ print(X_test.shape[0], 'test samples')
 
 # Building the model
 model = Sequential()
-model.add(Dense(512, activation='relu', input_shape=(3,)))
+model.add(Dense(1024, activation='relu', input_shape=(16,)))
 model.add(Dropout(.2))
-model.add(Dense(512, activation='relu'))
+model.add(Dense(1024, activation='relu'))
 model.add(Dropout(.2))
 model.add(Dense(3, activation='sigmoid'))
 
