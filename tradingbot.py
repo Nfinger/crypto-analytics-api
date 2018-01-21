@@ -2,7 +2,7 @@ import gdax, time
 import pandas as pd
 import numpy as np
 from numpy import concatenate
-import talib as ta
+# import talib as ta
 import gdax
 from keras.models import load_model
 from sklearn.preprocessing import MinMaxScaler

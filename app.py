@@ -32,10 +32,13 @@ import urllib.request
 api_key = 'EcBv9wqxfdWNMhtOI8WbkGb9XwOuITAPxBdljcxv8RYX1H7u2ucC0qokDp2KOWmr'
 api_secret = 'i5Y57Gwu8sH9qUE5TbB7zLotm7deTa1D9S8K458LWLXZZzNq5wNAZOHlGJmyjq1s'
 
-from kucoin.client import Client
-kuClient = Client(api_key, api_secret)
+kucoin_api_key = '5a64f6a46829d247d237e7bf'
+kucoin_api_secret = '93b85f5c-f164-4bea-bd40-3ffda4c03907'
+
 from binance.client import Client
 client = Client(api_key, api_secret)
+from kucoin.client import Client
+kuClient = Client(kucoin_api_key, kucoin_api_secret)
 
 bm = BinanceSocketManager(client)
 
@@ -76,8 +79,24 @@ def kucoinKlines():
     for ticker in info:
         if ticker['symbol'] == "BTCUSDT":
             BTCprice = ticker['price']
-    candles = kuClient.get_kline_data_tv(symbol,interval, from_time,
-    to_time)
+    if interval == "1min":
+        interval = Client.RESOLUTION_1MINUTE
+    elif interval == "5min":
+        interval = Client.RESOLUTION_5MINUTES
+    elif interval == "15min":
+        interval = Client.RESOLUTION_15MINUTES
+    elif interval == "30min":
+        interval = Client.RESOLUTION_30MINUTES
+    elif interval == "1hour":
+        interval = Client.RESOLUTION_1HOUR
+    elif interval == "1day":
+        interval = Client.RESOLUTION_1DAY
+    candles = kuClient.get_kline_data_tv(
+        symbol,
+        interval,
+        from_time,
+        to_time
+    )
     res["data"] = candles
     res["BTC"] = BTCprice
     return jsonify(res)

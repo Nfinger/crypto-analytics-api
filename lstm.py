@@ -14,7 +14,7 @@ from sklearn.preprocessing import MinMaxScaler
 from keras.models import load_model
 from matplotlib import pyplot
 import keras
-import talib as ta
+# import talib as ta
 from binance.client import Client
 from binance.enums import *
 
