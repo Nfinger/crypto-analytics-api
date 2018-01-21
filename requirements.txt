@@ -114,7 +114,6 @@ testpath==0.3.1
 textblob==0.15.0
 times==0.7
 tornado==4.5.3
-trading-env==0.0.1.dev0
 traitlets==4.3.2
 tweepy==3.5.0
 Twisted==17.9.0
