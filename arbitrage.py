@@ -44,7 +44,7 @@ for toCoin in toCoins:
     for fromCoin in marketCap.symbols:
         coin = marketCap.ticker(fromCoin)
         exchangeCoin = marketCap.ticker(toCoin)
-        if (coin['market_cap_usd'] >= 15000000):
+        if (coin['market_cap_usd'] and coin['market_cap_usd'] >= 15000000):
             lowestPrice = 10000000000000000000000
             highestPrice = 0
             exchange1 = None
