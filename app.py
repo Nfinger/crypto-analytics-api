@@ -3,7 +3,7 @@ from flask_restful import Resource, Api
 from json import dumps
 from flask.ext.jsonpify import jsonify
 from flask_cors import CORS
-from flask_pymongo import PyMongo
+from tinymongo import TinyMongoClient
 from flask_socketio import SocketIO, emit, disconnect
 from binance.enums import *
 from binance.websockets import BinanceSocketManager
@@ -13,6 +13,7 @@ from textblob import TextBlob
 import tweepy
 import requests
 import arrow
+from arbitrage import ArbitrageBot
 
 consumer_key = "BPlzYeWngcK8vluAmNLIoiBgH"
 consumer_secret = "nPobDCHkLZKjl8Y1BFm4PiJyCSKB1bM7U9cpLhjjGPqdi6unz4"
@@ -44,9 +45,9 @@ bm = BinanceSocketManager(client)
 
 app = Flask(__name__)
 socketio = SocketIO(app)
-# app.config['MONGO_DBNAME'] = 'traderdb'
-# app.config['MONGO_URI'] = 'mongodb://localhost:27017/traderdb'
-# mongo = PyMongo(app)
+connection = TinyMongoClient()
+db = connection.cryptoAnalytics
+collection = db.arbitrage
 CORS(app)
 
 @app.route("/binance")
@@ -170,4 +171,5 @@ def getTweets():
 
 if __name__ == '__main__':
     socketio.run(app)
+    arbitrageBot = ArbitrageBot()
     app.run()
