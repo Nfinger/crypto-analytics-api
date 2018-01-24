@@ -1,7 +1,7 @@
 from flask import Flask, request
 from flask_restful import Resource, Api
 from json import dumps
-from flask.ext.jsonpify import jsonify
+from flask_jsonpify import jsonify
 from flask_cors import CORS
 from tinymongo import TinyMongoClient
 from flask_socketio import SocketIO, emit, disconnect
@@ -153,8 +153,8 @@ def binanceSocket(info):
 def getTrades():
     usd = request.args.get('usd')
     holdings = request.args.get('holdings')
-    trades, usd, holdings, predictions = TradingBot.trade(int(usd), int(holdings))
-    return jsonify({'result' : trades, 'usd':usd, 'holdings': holdings, 'predictions':predictions.tolist()})
+    # trades, usd, holdings, predictions = TradingBot.trade(int(usd), int(holdings))
+    # return jsonify({'result' : trades, 'usd':usd, 'holdings': holdings, 'predictions':predictions.tolist()})
 
 @app.route("/twitter")
 def getTweets():
@@ -168,8 +168,12 @@ def getTweets():
     data = [s._json for s in results]
     return jsonify({"tweets": data})
 
+@app.route("/cryptoping")
+def handleCryptoPing():
+    print(request.get_json())
+
 
 if __name__ == '__main__':
     socketio.run(app)
-    arbitrageBot = ArbitrageBot()
+    # arbitrageBot = ArbitrageBot()
     app.run()
