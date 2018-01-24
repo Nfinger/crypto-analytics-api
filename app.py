@@ -13,7 +13,7 @@ from textblob import TextBlob
 import tweepy
 import requests
 import arrow
-from arbitrage import ArbitrageBot
+# from arbitrage import ArbitrageBot
 
 consumer_key = "BPlzYeWngcK8vluAmNLIoiBgH"
 consumer_secret = "nPobDCHkLZKjl8Y1BFm4PiJyCSKB1bM7U9cpLhjjGPqdi6unz4"
