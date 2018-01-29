@@ -172,7 +172,7 @@ def getTweets():
 def handleCryptoPing():
     arbitrageBot = ArbitrageBot()
     arbitrageBot.checkCoin(request.get_json())
-    return
+    return ""
 
 
 if __name__ == '__main__':
