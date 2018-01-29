@@ -168,7 +168,7 @@ def getTweets():
     data = [s._json for s in results]
     return jsonify({"tweets": data})
 
-@app.route("/cryptoping")
+@app.route("/cryptoping", methods=["POST"])
 def handleCryptoPing():
     print(request.get_json())
 
