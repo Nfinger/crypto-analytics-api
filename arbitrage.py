@@ -38,7 +38,7 @@ class ArbitrageBot:
         self.movement = None
         # from_coins = market_cap.symbols
 
-    def scan_for_arbitrage(to_coin, targetCoin):
+    def scan_for_arbitrage(self, to_coin, targetCoin):
         print("Running!", to_coin)
         # coin = marketCap.ticker(from_coin)
         # exchangeCoin = marketCap.ticker(to_coin)
@@ -64,7 +64,7 @@ class ArbitrageBot:
                                         % (targetCoin, to_coin, self.lowest_price, to_coin,
                                             self.exchange1, self.highest_price, to_coin, self.exchange2))
 
-    def checkCoin(targetCoin_json):
+    def checkCoin(self, targetCoin_json):
         if (targetCoin_json["type"] == "up"):
             self.movement = "up"
             self.highest_price = targetCoin_json["price_btc"]
