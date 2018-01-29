@@ -35,7 +35,7 @@ class ArbitrageBot:
         self.highest_price = 0
         self.exchange1 = None
         self.exchange2 = None
-        self.movement
+        self.movement = None
         # from_coins = market_cap.symbols
 
     def scan_for_arbitrage(to_coin, targetCoin):
