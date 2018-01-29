@@ -13,7 +13,7 @@ from textblob import TextBlob
 import tweepy
 import requests
 import arrow
-# from arbitrage import ArbitrageBot
+from arbitrage import ArbitrageBot
 
 consumer_key = "BPlzYeWngcK8vluAmNLIoiBgH"
 consumer_secret = "nPobDCHkLZKjl8Y1BFm4PiJyCSKB1bM7U9cpLhjjGPqdi6unz4"
@@ -170,10 +170,11 @@ def getTweets():
 
 @app.route("/cryptoping", methods=["POST"])
 def handleCryptoPing():
-    print(request.get_json())
+    arbitrageBot = ArbitrageBot()
+    arbitrageBot.checkCoin(request.get_json())
+    return
 
 
 if __name__ == '__main__':
     socketio.run(app)
-    # arbitrageBot = ArbitrageBot()
     app.run()
