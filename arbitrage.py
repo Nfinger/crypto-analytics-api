@@ -58,11 +58,10 @@ class ArbitrageBot:
         if (self.highest_price > 0 and self.lowest_price < 10000000000000000000000
                 and self.highest_price > Decimal(.0000001) and self.lowest_price > Decimal(.0000001)):
             percent_diff = ((self.highest_price - self.lowest_price) / self.highest_price) * 100
-            if percent_diff > 50:
-                self.slack.chat.post_message('#signals',
-                                        "%s/%s is listed for %f%s on %s and %f%s on %s"
-                                        % (targetCoin, to_coin, self.lowest_price, to_coin,
-                                            self.exchange1, self.highest_price, to_coin, self.exchange2))
+            self.slack.chat.post_message('#signals',
+                                    "%s/%s is listed for %f%s on %s and %f%s on %s"
+                                    % (targetCoin, to_coin, self.lowest_price, to_coin,
+                                        self.exchange1, self.highest_price, to_coin, self.exchange2))
 
     def checkCoin(self, targetCoin_json):
         if (targetCoin_json["type"] == "up"):
