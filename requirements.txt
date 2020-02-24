@@ -8,7 +8,7 @@ Automat==0.6.0
 beautifulsoup4==4.6.0
 binance==0.1
 bintrees==2.0.7
-bleach==1.5.0
+bleach==3.1.1
 bokeh==0.12.13
 bs4==0.0.1
 catboost==0.5.2.1
