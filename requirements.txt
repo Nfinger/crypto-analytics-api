@@ -122,7 +122,7 @@ Twisted==17.9.0
 twitter==1.18.0
 txaio==2.8.2
 tzlocal==1.5.1
-urllib3==1.22
+urllib3==1.26.5
 wcwidth==0.1.7
 websocket-client==0.40.0
 Werkzeug==0.14.1
