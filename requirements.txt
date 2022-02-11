@@ -118,7 +118,7 @@ tinymongo==0.2.0
 tornado==4.5.3
 traitlets==4.3.2
 tweepy==3.5.0
-Twisted==17.9.0
+Twisted==22.1.0
 twitter==1.18.0
 txaio==2.8.2
 tzlocal==1.5.1
