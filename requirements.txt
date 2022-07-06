@@ -36,7 +36,7 @@ gdax==1.0.6
 gunicorn==19.7.1
 gym==0.9.4
 h5py==2.7.1
-html5lib==0.9999999
+html5lib==0.999999999
 hyperas==0.4
 hyperlink==17.3.1
 hyperopt==0.1
